@@ -532,21 +532,31 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"8ZNvh":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _three = require("three");
+var _circleJpg = require("./img/circle.jpg");
+var _circleJpgDefault = parcelHelpers.interopDefault(_circleJpg);
 const scene = new _three.Scene();
-const camera = new _three.PerspectiveCamera(75, window.innerWidth / window.innerHeight);
+const camera = new _three.PerspectiveCamera(45, window.innerWidth / window.innerHeight);
+camera.position.set(-1, 0, 3);
 scene.add(camera);
-const geometry = new _three.BoxGeometry(1, 1, 1);
-const material = new _three.MeshBasicMaterial({
-    color: "red"
+const textureLoader = new _three.TextureLoader();
+const texture = textureLoader.load((0, _circleJpgDefault.default));
+const geometry = new _three.TorusKnotGeometry(0.5, 0.2, 100, 22);
+const material = new _three.MeshMatcapMaterial({
+    matcap: texture
 });
 const mesh = new _three.Mesh(geometry, material);
+// mesh.rotation.set(0, Math.PI / 4, 0)
 scene.add(mesh);
 const renderer = new _three.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.append(renderer.domElement);
+window.setTimeout(()=>{
+    renderer.render(scene, camera);
+}, 50);
 
-},{"three":"ktPTu"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"9OBtg","./img/circle.jpg":"jgmz4"}],"ktPTu":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "ACESFilmicToneMapping", ()=>ACESFilmicToneMapping);
@@ -28884,6 +28894,43 @@ exports.export = function(dest, destName, get) {
         get: get
     });
 };
+
+},{}],"jgmz4":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("lORN7") + "circle.720bf334.jpg" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"30W3B"}],"30W3B":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ("" + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return "/";
+}
+function getBaseURL(url) {
+    return ("" + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, "$1") + "/";
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ("" + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error("Origin not found");
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
 
 },{}]},["2TisQ","8ZNvh"], "8ZNvh", "parcelRequire94c2")
 
