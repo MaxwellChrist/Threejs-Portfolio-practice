@@ -1,3 +1,36 @@
+html, body {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  background: #110912;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  overflow-x: hidden;
+}
 
+body {
+  margin: 0;
+}
+
+main {
+  height: 100%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+}
+
+h1 {
+  width: 50%;
+  min-width: 100px;
+  color: #fff;
+  height: 100vh;
+  z-index: 1;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0 2rem;
+  font-size: 5rem;
+  font-weight: 100;
+  display: flex;
+}
 
 /*# sourceMappingURL=index.4d663569.css.map */
