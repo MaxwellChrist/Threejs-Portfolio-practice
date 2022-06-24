@@ -549,12 +549,35 @@ const material = new _three.MeshMatcapMaterial({
 const mesh = new _three.Mesh(geometry, material);
 // mesh.rotation.set(0, Math.PI / 4, 0)
 scene.add(mesh);
-const renderer = new _three.WebGLRenderer();
+const renderer = new _three.WebGLRenderer({
+    alpha: true
+});
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.append(renderer.domElement);
-window.setTimeout(()=>{
+const cursor = {
+    x: 0,
+    y: 0
+};
+window.addEventListener("mousemove", (e)=>{
+    cursor.x = e.clientX / window.innerWidth - 0.5;
+    cursor.y = e.clientY / window.innerHeight - 0.5;
+    console.log(cursor.x, cursor.y);
+});
+const tick = ()=>{
+    window.requestAnimationFrame(tick);
+    mesh.rotation.y += 0.005;
+    const cameraX = -cursor.x - 1;
+    const cameraY = cursor.y;
+    // camera.position.x = cameraX;
+    // camera.position.y = cameraY;
+    camera.position.x += (cameraX - camera.position.x) / 25;
+    camera.position.y += (cameraY - camera.position.y) / 25;
     renderer.render(scene, camera);
-}, 50);
+};
+tick() // window.setTimeout(() => {
+ //     renderer.render(scene, camera)
+ // }, 50)
+;
 
 },{"three":"ktPTu","@parcel/transformer-js/src/esmodule-helpers.js":"9OBtg","./img/circle.jpg":"jgmz4"}],"ktPTu":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
